@@ -35,4 +35,3 @@ module.exports = (app)=>{
     });
 
 }
-// http://localhost:5000/auth/linkedin/callback?error=invalid_scope_error&error_description=Unknown+scope+%26quot%3Bprofile%26quot%3B
