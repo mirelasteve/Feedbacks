@@ -1,4 +1,4 @@
-var passport =  require('passport');
+const passport =  require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 const GitHubStrategy = require('passport-github').Strategy;
