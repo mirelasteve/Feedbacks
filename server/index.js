@@ -27,5 +27,14 @@ app.use(passport.session());
 authRoutes(app);
 billingRoutes(app);
 
+if(process.env.NODE_END === 'production'){
+    app.use(express.static('feedbackmessages/build'));
+    
+    const path = require('path');
+    app.get('*',(req,res)=>{
+        res.sendFile(path.resolve(__dirname,'feedbackmessages','build','index.html'))
+    })
+}
+
 const PORT = process.env.PORT || 5000
 app.listen(PORT);
