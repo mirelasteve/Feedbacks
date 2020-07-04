@@ -1,0 +1,9 @@
+ body{
+    background-image: linear-gradient(to left top, #4d2a25, #582f27, #633529, #6e3b2a, #78422a, #7a4726, #7a4d23, #7a5320, #70581b, #655d1b, #58611e, #4a6525); }
+
+ .no-shadows {
+    box-shadow: none!important;
+}
+.mt-5{
+    margin-top:15%;
+}
