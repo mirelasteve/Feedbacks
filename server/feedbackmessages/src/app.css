@@ -1,9 +1,35 @@
- body{
-    background-image: linear-gradient(to left top, #4d2a25, #582f27, #633529, #6e3b2a, #78422a, #7a4726, #7a4d23, #7a5320, #70581b, #655d1b, #58611e, #4a6525); }
-
+body{
+    background-image: linear-gradient(to top, #f5deb3, #d3cfa4, #b2c099, #93b091, #789f8a, #6a9586, #5c8a82, #51807d, #4b7a7a, #467477, #416e74, #3d6870);
+    background-repeat:no-repeat;
+    background-size:cover;
+    height:100%;
+}
  .no-shadows {
     box-shadow: none!important;
 }
 .mt-5{
+    margin-top:5%;
+}
+.mt-15{
     margin-top:15%;
+}
+/* Application Colors */
+.text-light-app{
+    color:#F5DEB3;
+}
+
+.text-darken-app{
+    color:#2f4858
+}
+
+.bold{
+    font-weight:bold;
+}
+
+/* Surveys Css */
+
+.subject {
+    color:#2f4858;
+    text-transform: capitalize;
+    margin:auto 0%;
 }

@@ -1,15 +1,19 @@
-import { Route, Switch} from 'react-router-dom';
- import React from 'react'
+import React from 'react'
+import { Route, Switch} from 'react-router-dom'
 import { Landing } from '../elements/landing';
-import { SurveyList  } from '../elements/surveyList';
+import  SurveyList  from '../elements/surveys/surveyList';
+import  SurveyNew  from '../elements/surveys/surveyNew';
  
  export const Routes = () => {
      return (
-       
-             <Switch>
+        <div>
+            <Switch>
                 <Route exact path='/' component= {Landing}></Route>
-                <Route path='/surveys' component= {SurveyList}></Route>
+                <Route exact path='/surveys' component= {SurveyList}></Route>
+                <Route exact path='/surveys/new' component={SurveyNew}></Route>
              </Switch>
+        </div>
+            
         
      )
  }

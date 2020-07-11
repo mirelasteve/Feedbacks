@@ -2,9 +2,10 @@ import 'materialize-css/dist/css/materialize.min.css';
 import React,{Component} from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import { Routes } from './router/routes';
-import  Header  from './elements/header.jsx';
+import  Header  from './elements/header';
 import {connect} from 'react-redux';
-import * as actions from './actions/index';
+import * as actions from './actions'
+import '../app.css'
 
 class App extends Component { 
     constructor(props){
@@ -17,15 +18,12 @@ class App extends Component {
 
     render(){
         return(
-           
+            <BrowserRouter>
                 <div className='container'>
-                <BrowserRouter>
                     <Header></Header>
                     <Routes></Routes>
-                </BrowserRouter>
-                    
                 </div>
-            
+            </BrowserRouter>
                 
         )	} 
  } 

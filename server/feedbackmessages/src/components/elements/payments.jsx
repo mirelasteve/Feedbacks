@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import { connect } from 'react-redux';
-import * as actions from '../actions/index';
+import * as actions from '../actions'
 class Payments extends Component { 
     constructor(props){
         super(props);

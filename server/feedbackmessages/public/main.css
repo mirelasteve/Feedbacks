@@ -1,7 +1,5 @@
-html{
-    background: linear-gradient(to left top, #4d2a25, #582f27, #633529, #6e3b2a, #78422a, #7a4726, #7a4d23, #7a5320, #70581b, #655d1b, #58611e, #4a6525); 
-    background-repeat:no-repeat;
-    background-size:cover;
+/* body{
+    background-image: linear-gradient(to bottom, #0f022b, #271038, #431844, #5e214d, #7a2b53, #8c3356, #9d3d57, #ad4858, #b95158, #c45a58, #ce6457, #d76f56);
     height:100%;
 }
  .no-shadows {
@@ -9,4 +7,4 @@ html{
 }
 .mt-5{
     margin-top:15%;
-}
+} */
