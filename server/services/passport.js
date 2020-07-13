@@ -25,13 +25,19 @@ passport.use(new GoogleStrategy({
     proxy:true
  },
  async (accessToken,refreshToken,profile,done)=>{
+     
      const existingUser = await User.findOne({googleId:profile.id})
-        
+     
             if(existingUser){
+                
              return done(null,existingUser)
             } 
      
-            const user = await new User({ googleId:profile.id}).save()
+            const user = await new User({ 
+                googleId:profile.id,
+                displayName:profile.displayName,
+                userEmails:profile.emails
+            }).save()
             done(null,user)
             
   
@@ -46,7 +52,7 @@ passport.use(new LinkedInStrategy({
     clientSecret: keys.linkedinClientSecret,
     callbackURL: '/auth/linkedin/callback'
   },(token, tokenSecret, profile, done)=> {
-      console.log(profile.id);
+    
     User.findOne({linkedinId: profile.id}).then((existingUser)=>{
         if(existingUser){
             done(null,existingUser)

@@ -3,10 +3,13 @@ const helper = sendgrid.mail;
 const keys = require('../config/config');
 
 class Mailer extends helper.Mail {
-    constructor({subject,recipients}, content){
+    constructor({subject,recipients,fromEmail}, content){
+        
         super();
+        
         this.sgApi = sendgrid(keys.sendGridKey);
-        this.from_email = new helper.Email('mirela.vr.tsvetkova@gmail.com');
+        //Change for heroku
+        this.from_email = new helper.Email(fromEmail);
         this.subject = subject;
         this.body = new helper.Content('text/html', content);
         this.recipients = this.formatAddresses(recipients);
@@ -18,7 +21,7 @@ class Mailer extends helper.Mail {
 
     }
     formatAddresses(recipients){
-            console.log(recipients)
+            
             return recipients.map( ({email}) =>{
                 return new helper.Email(email);
             })

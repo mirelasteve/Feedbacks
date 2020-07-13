@@ -16,7 +16,7 @@ class Payments extends Component {
                 name = 'Feedback Messages'
                 description = '5$ for 5 emails'
             >
-            <button className='btn text-light transparent'>Add Credits</button>
+            <button className='btn text-light-app transparent'>Add Credits</button>
             </StripeCheckout>
         )	} 
  } 

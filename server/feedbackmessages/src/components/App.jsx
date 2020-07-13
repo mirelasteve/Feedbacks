@@ -14,6 +14,7 @@ class App extends Component {
     }
     componentDidMount(){
         this.props.fetchUser();
+        
     }
 
     render(){
@@ -27,5 +28,9 @@ class App extends Component {
                 
         )	} 
  } 
-
- export default connect(null,actions)(App);
+function mapStateToProps(state){
+    return {
+        auth:state.auth
+    }
+}
+ export default connect(mapStateToProps,actions)(App);

@@ -13,12 +13,17 @@ class Header extends Component {
         
         switch(this.props.auth){
             case null :return  <li>Loading ... </li>
-            case false:return (<li><a href='/auth/google'>Log in with Google</a></li>)
+            case false:return [<li className='right'><a href='/auth/google'><i className="fa fa-google right small"></i></a></li>,
+                               <li className='right'><a href='/auth/google'><i className="fa fa-linkedin-square right small"></i></a></li>,
+                               <li className='right'><a href='/auth/google'><i className="fa fa-github right small"></i></a></li>,
+                               <li className='right'><a href='/auth/google'><i className="fa fa-facebook right small"></i></a></li>,
+                            ]
             default: return [
-                                <li className='text-light-app' key ='payments'><Payments/></li> ,
-                                <li className='text-light-app' key ='surveys'><Link to='/surveys'> Surveys</Link></li>,
-                                <li className='text-light-app' key ='credits'>Credits: {this.props.auth.credits}</li>,
-                                <li className='text-light-app' key ='logout'><a href='/api/logout'>Log out</a></li>,
+                                
+                                <li className='text-light-app ml-1' key ='credits'>Credits: {this.props.auth.credits}</li>,
+                                <li className='text-light-app ml-1' key ='surveys'><Link to='/surveys'><span className='text-light-app'> Surveys</span></Link></li>,
+                                <li className='text-light-app ml-1' key ='payments'><Payments/></li> ,
+                                <li className='text-light-app right ml-1' key ='logout'><a href='/api/logout'>Log out</a></li>,
                 	        ]
         }
     }
@@ -27,10 +32,16 @@ class Header extends Component {
         return(
             <nav className='transparent no-shadows' >
             <div className='nav-wrapper '>
+            
             {/* <Link to={this.props.auth ? '/surveys':'/'}>
                 <img src={coffeeTellerLogo} alt='logo'/>
             </Link> */}
-                <ul className="right section text-light-app">
+                <ul className=" text-light-app">
+                {
+                this.props.auth
+                ?<li className='mr-5'>Welcome, {this.props.auth.displayName}</li>
+                : <span></span>
+            }
                     {this.renderContent()}
                 </ul>
             </div>

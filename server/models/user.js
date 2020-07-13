@@ -6,7 +6,9 @@ const userSchema = new Schema({
     linkedinId:String,
     githubId:String,
     facebookId:String,
-    credits:{ type:Number, default:0}
+    credits:{ type:Number, default:0},
+    displayName:String,
+    userEmails:Array
 })
 
 mongoose.model('users',userSchema)

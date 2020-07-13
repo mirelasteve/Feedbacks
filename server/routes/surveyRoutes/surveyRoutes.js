@@ -8,6 +8,8 @@ const Survey = require('../../models/survey');
 const Mailer = require('../../services/Mailer');
 const surveyTemplate = require('../../services/templates/surveyTemplate');
 const Surveys = mongoose.model('surveys');
+const gratitudeOnFeedback = require('./surveyTemplate/gratitudeOnFeedback');
+
 module.exports = app =>{
 
     app.get('/api/surveys',requireLogin, async (req,res)=>{
@@ -15,13 +17,22 @@ module.exports = app =>{
         const surveys = await Surveys
             .find({ _user:req.user.id })
             .select({recipients:false})
+            
         res.send(surveys);
-     
-
     });
+    app.get('/api/surveys/remove/:surveyId',requireLogin,async (req,res)=>{
+        const surveyId = req.params.surveyId;
+        const surveys = await Surveys
+            .find({ _user:req.user.id })
+            .deleteOne({_id:surveyId})
+            .exec();
+            res.send(surveys);
+            res.redirect('/surveys')
+        
+    })
 
     app.get('/api/surveys/:surveyId/:choice',(req,res)=>
-        res.send('Thank you for the feedback')
+        res.send(gratitudeOnFeedback)
     );
 
     app.post('/api/surveys/webhooks',(req,res)=>{
@@ -41,7 +52,7 @@ module.exports = app =>{
             .compact()
             .uniqBy('email','surveyId')
             .each( ({email,surveyId,choice})=>{
-                console.log(email,surveyId,choice)
+                // console.log(email,surveyId,choice)
                 Surveys.updateOne({
                     _id:surveyId,
                     recipients:{
@@ -62,18 +73,21 @@ module.exports = app =>{
         res.send({})
     });
     app.post('/api/surveys',requireLogin,requireCredits, async (req,res,next)=>{
-     
-        const {title, subject,body,recipients } = req.body;
+        // console.log(req.body);
+        const {title, subject,body,recipients,fromEmail } = req.body;
         const survey = await new Surveys({
             title,
             subject,
             body,
+            fromEmail,
             recipients:recipients.split(',').map(email=> ({email : email.trim()}) ),
             _user:req.user.id,
             dateSent:Date.now()
         });
+        // console.log(survey)
         const mailer = new Mailer(survey, surveyTemplate(survey));
         try{
+           
             await mailer.send();
             await survey.save();
             req.user.credits-=1;
@@ -81,6 +95,7 @@ module.exports = app =>{
             res.send(user);
         }
         catch(error){
+            // console.log(error)
             res.send(422).send(error)
         }
     });

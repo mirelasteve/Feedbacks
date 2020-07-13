@@ -1,12 +1,19 @@
 import React from 'react'
 
- const surveyField = ({input,label, meta:{error,touched}}) => {
-     
+ const surveyField = ({input,label,userEmails, meta:{error,touched}}) => {
      
     return (
-        <div className=''>
-            <label>{label}</label>
-            <input {...input}/>
+        <div className='col m7'>
+            <label className='text-light-app fontSize-1rem'>{label}</label>
+            {
+                label==='From: '
+                ? userEmails.length 
+                    ? <input className='input-field' {...input} placeholder={userEmails[0].value} ></input> 
+                    :''
+                : <input className='input-field' {...input}/>
+
+            }
+            
             <span className='red-text'>
                 {touched && error}
             </span>

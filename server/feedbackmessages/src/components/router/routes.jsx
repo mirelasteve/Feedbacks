@@ -9,7 +9,7 @@ import  SurveyNew  from '../elements/surveys/surveyNew';
         <div>
             <Switch>
                 <Route exact path='/' component= {Landing}></Route>
-                <Route exact path='/surveys' component= {SurveyList}></Route>
+                <Route exact path='/surveys' render={()=><SurveyList></SurveyList>}></Route>
                 <Route exact path='/surveys/new' component={SurveyNew}></Route>
              </Switch>
         </div>

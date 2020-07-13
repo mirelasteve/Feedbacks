@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {reduxForm , Field} from 'redux-form';
+
 import surveyField from './surveyField.jsx';
 import {Link} from 'react-router-dom';
 import validations from '../../utils/validations';
@@ -8,31 +9,43 @@ import formFields from './formField';
 class SurveyForm extends Component { 
     constructor(props){
         super(props);
-        this.state={}
+        this.state={
+     
+        }
     }
-    renderFields(){
+   
+    renderFields(userEmails){
        return formFields.map(({label,name})=>{
-           return <Field className='text-light-app' key={name} component={surveyField} type='text' label={label} name={name}></Field>
+           return <Field className='text-light-app' key={name} component={surveyField} type='text' label={label} name={name} userEmails={userEmails}></Field>
        }
     )
     }
     render(){
-        return(<div className='mt-5'>
+      
+        
+         return(<div className='mt-5 row'>
         <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
-            {this.renderFields()}
-           <Link className='btn-flat left red' to='/surveys'>Cancel</Link>
+            
+            <div className='col m9 xs12'>
+                
+                {this.renderFields(this.props.userEmails)}
+           </div> 
+            <div className='col m12 '>
+           <Link className='btn-flat left red ' to='/surveys'>Cancel</Link>
             <button className='green btn-flat right white-text' type='submit'>
                 Next
                 <i className='material-icons right'>done</i>
             </button>
+            </div>
         </form>
             
         </div>)	} 
  } 
  function validate(values){
+     
      const errors={};
      errors.recipients = validations(values.recipients || '') 
-
+     errors.fromEmail =  validations(values.fromEmail || '')
      if(!values.title){
          errors.title = 'You must provide a title';
      }
@@ -45,11 +58,14 @@ class SurveyForm extends Component {
     if(!values.recipients){
         errors.recipients = 'Invalid email';
     }
+    if(!values.fromEmail){
+        errors.fromEmail = 'Please enter email';
+    }
     
      return errors;
  }
  export default reduxForm({
-     validate,
+    validate,
     form:'surveyForm',
     destroyOnUnmount:false
  })(SurveyForm);

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const surveyListItem = (props) => {
-    console.log(props);
+    // console.log(props);
     
     return (
         <div>
