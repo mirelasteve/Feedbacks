@@ -38,7 +38,7 @@ module.exports = app =>{
 
     app.post('/api/surveys/webhooks',(req,res)=>{
         const p = new Path('/api/surveys/:surveyId/:choice');
-        console.log(req.body)
+        // console.log(req.body)
         _.chain(req.body)
             .map( ({email,url})=>{
 
@@ -53,7 +53,7 @@ module.exports = app =>{
             .compact()
             .uniqBy('email','surveyId')
             .each( ({email,surveyId,choice})=>{
-                console.log(email,surveyId,choice)
+                // console.log(email,surveyId,choice)
                 Surveys.updateOne({
                     _id:surveyId,
                     recipients:{
@@ -86,7 +86,7 @@ module.exports = app =>{
             dateSent:Date.now()
         });
         // console.log(survey)
-        const mailer = new Mailer(survey, surveyTemplateModern(survey));
+        const mailer = new Mailer(survey, surveyTemplate(survey));
         try{
            
             await mailer.send();

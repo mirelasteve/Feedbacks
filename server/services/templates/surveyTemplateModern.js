@@ -16,11 +16,6 @@ return (
         <div>
             <a style='color:#F5DEB3' href="${keys.redirectDomain}/api/surveys/${survey.id}/no">No</a>
         </div>
-        <form action="${keys.redirectDomain}/api/surveys/${survey.id}/read">
-            <input id='answer' type='text'></input>
-            <button id='myButton' type='submit'>Submit</button>
-        </form>
-       
        
     </div>
     
