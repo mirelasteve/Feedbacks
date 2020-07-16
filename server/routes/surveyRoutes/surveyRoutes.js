@@ -96,7 +96,7 @@ module.exports = app =>{
             res.send(user);
         }
         catch(error){
-            // console.log(error)
+           
             res.send(422).send(error)
         }
     });
