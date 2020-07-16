@@ -37,7 +37,7 @@ class SurveyNew extends Component {
             <div className='mt-5'>
                 {this.renderContent()}
             </div>
-            :<div>Loading ...</div>
+            :<div></div>
         )	} 
  } 
 

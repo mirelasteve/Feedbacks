@@ -7,6 +7,7 @@ const requireCredits = require('../../middlewares/requireCredits');
 const Survey = require('../../models/survey');
 const Mailer = require('../../services/Mailer');
 const surveyTemplate = require('../../services/templates/surveyTemplate');
+const surveyTemplateModern = require('../../services/templates/surveyTemplateModern');
 const Surveys = mongoose.model('surveys');
 const gratitudeOnFeedback = require('./surveyTemplate/gratitudeOnFeedback');
 
@@ -27,7 +28,7 @@ module.exports = app =>{
             .deleteOne({_id:surveyId})
             .exec();
             res.send(surveys);
-            res.redirect('/surveys')
+           
         
     })
 
@@ -37,7 +38,7 @@ module.exports = app =>{
 
     app.post('/api/surveys/webhooks',(req,res)=>{
         const p = new Path('/api/surveys/:surveyId/:choice');
-        
+        console.log(req.body)
         _.chain(req.body)
             .map( ({email,url})=>{
 
@@ -52,7 +53,7 @@ module.exports = app =>{
             .compact()
             .uniqBy('email','surveyId')
             .each( ({email,surveyId,choice})=>{
-                // console.log(email,surveyId,choice)
+                console.log(email,surveyId,choice)
                 Surveys.updateOne({
                     _id:surveyId,
                     recipients:{
@@ -85,7 +86,7 @@ module.exports = app =>{
             dateSent:Date.now()
         });
         // console.log(survey)
-        const mailer = new Mailer(survey, surveyTemplate(survey));
+        const mailer = new Mailer(survey, surveyTemplateModern(survey));
         try{
            
             await mailer.send();

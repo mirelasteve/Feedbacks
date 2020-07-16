@@ -8,15 +8,21 @@ const SurveyFormReview = ({ onCancel,formValues,submitSurvey,userEmails, history
     // console.log(userEmails);
     
     
-    const reviewForm = formFields.map(({name,label})=>
-                            <div key={name} className='  '>
-                                <label className='text-light-app fontSize-1rem'>{label}</label>
-                                <div className='bg-light-app text-black input-field fontSize-1rem'>{formValues[name]}</div>
-                            </div> 
-                        )
+    const reviewForm = <div  className='text-light-app'>
+                            <h5>{formValues.title}</h5>
+                            <h6>{formValues.subject}</h6>
+                            <h6>{formValues.body}</h6>
+                            <div>
+                                        <a className='text-light-app'>Yes</a>
+                                    </div>
+                                    <div>
+                                        <a className='text-light-app'>No</a>
+                                    </div>
+                        </div>
+                      
     return (
         <div className='row'>
-            {/* <SurveyList></SurveyList> */}
+            <h>This is how your customers will see the survey in their mail</h>
             <div className='col m8'>
                 {reviewForm}
             </div>

@@ -19,7 +19,7 @@ export const handleStripeToken = (token)=> async (dispatch)=>{
         type:FETCH_USER,
         payload:res.data
         
-    })
+    })  
 }
 
 export const submitSurvey = ( values,history ) => async(dispatch) => {
@@ -43,15 +43,14 @@ export const fetchSurveys = ()=>{
     }
 }
 
-export const removeSurvey = (surveyId,index)=>{
-    
+export const removeSurvey = (surveyId)=>{
+   
     return async (dispatch)=>{
-            const res = await axios.get(`/api/surveys/remove/${surveyId}`);
+        const res = await axios.get(`/api/surveys/remove/${surveyId}`);
     
-
     dispatch({
         type:REMOVE_SURVEY,
-        index
+        surveyId
     })
 }
 }

@@ -53,10 +53,19 @@ class SurveyList  extends Component {
                 buttonsFlags:!changeButton
             })
         }
+    }
+    removeSurveys(surveyId){
+        this.props.removeSurvey(surveyId);
+        const deepCopySurveys = _.cloneDeep(this.state.surveys);
+        let newSurveys = deepCopySurveys.filter(x=>x._id !== surveyId);
+        console.log(newSurveys);
         
-        
+        this.setState({
+            surveys:newSurveys
+        })
     }
     render() {
+        
         
         
         if(this.state.surveys){
@@ -82,7 +91,7 @@ class SurveyList  extends Component {
                     <div>
                         <span className='card-title'>
                         {new Date(survey.dateSent).toLocaleDateString()}
-                        <button className='btn-small right red' onClick={()=>this.props.removeSurvey(survey._id,index)}>X</button>
+                        <button className='btn-small right red' onClick={()=>this.removeSurveys(survey._id)}>X</button>
                         
                         </span>
                         
@@ -135,6 +144,8 @@ class SurveyList  extends Component {
 }
 
 function mapStateToProps(state){
+    console.log('mapState ',state.surveys);
+    
     return{
         surveys:state.surveys,
         auth:state.auth
