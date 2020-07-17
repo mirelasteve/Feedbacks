@@ -54,7 +54,7 @@ passport.use(new LinkedInStrategy({
     callbackURL: '/auth/linkedin/callback',
     proxy:true
   },(token, tokenSecret, profile, done)=> {
-    // console.log('linkedin')
+    
     User.findOne({linkedinId: profile.id}).then((existingUser)=>{
         if(existingUser){
             done(null,existingUser)
@@ -77,15 +77,15 @@ passport.use(new GitHubStrategy({
     proxy:true
   },
   (token, tokenSecret, profile, done)=> {
-    
+    console.log(profile.id,profile.displayName,profile.username)
     User.findOne({ githubId: profile.id }).then((existingUser)=>{
         if(existingUser){
             done(null,existingUser)
         } else {
- 
+            let displayName = profile.displayName !== null ?profile.displayName: profile.username;
             new User({
                 githubId:profile.id,
-                displayName:profile.displayName,
+                displayName:displayName,
                 userEmails:profile.emails
             }).save()
                 .then(user=> done(null,user))
