@@ -1,6 +1,7 @@
 const passport = require('passport');
 
 module.exports = (app)=>{
+    console.log('routes')
     app.get('/auth/google', passport.authenticate('google',{
         scope:['profile','email']
         })
@@ -12,14 +13,17 @@ module.exports = (app)=>{
         res.redirect('/surveys')
     });
 
-
-
-
-    app.get('/auth/linkedin',passport.authenticate('linkedin',{
+app.get('/auth/linkedin',passport.authenticate('linkedin',{
         scope: ['r_liteprofile', 'r_emailaddress']
         }));
 
-    app.get('/auth/linkedin/callback',passport.authenticate('linkedin'))
+    app.get('/auth/linkedin/callback',
+            passport.authenticate('linkedin'),
+            (req,res)=>{
+                console.log(req)
+                res.redirect('/surveys')
+            }
+        )
 
     
     
@@ -28,6 +32,7 @@ module.exports = (app)=>{
     app.get('/auth/github/callback',
      passport.authenticate('github'),
      (req,res)=>{
+         console.log(req)
          res.redirect('/surveys')
      }
     );

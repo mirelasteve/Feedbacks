@@ -71,7 +71,7 @@ class SurveyList  extends Component {
         if(this.state.surveys){
             return (
             <div className='row mt-5'>
-                <a className='dropdown-trigger btn transparent text-light-app'  data-target='dropdown1'>Sort by</a>
+                <a href='#'className='dropdown-trigger btn transparent text-light-app'  data-target='dropdown1'>Sort by</a>
 
                     <div className='col-10'>
                         <ul id='dropdown1' className='dropdown-content'>

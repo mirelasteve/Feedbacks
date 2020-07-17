@@ -4,6 +4,7 @@ import {FETCH_USER,FETCH_SURVEYS, REMOVE_SURVEY} from './types';
 export const fetchUser = ()=>{
     
     return async function (dispatch){
+        
         const res= await axios.get('/api/current_user');
         dispatch({
             type:FETCH_USER,
@@ -46,7 +47,7 @@ export const fetchSurveys = ()=>{
 export const removeSurvey = (surveyId)=>{
    
     return async (dispatch)=>{
-        const res = await axios.get(`/api/surveys/remove/${surveyId}`);
+        await axios.get(`/api/surveys/remove/${surveyId}`);
     
     dispatch({
         type:REMOVE_SURVEY,

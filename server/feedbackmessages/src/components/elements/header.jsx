@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Payments from './payments';
-import coffeeTellerLogo from '../../LogoCoffeeTeller3.png';
+
 
 class Header extends Component { 
     constructor(props){
@@ -13,10 +13,10 @@ class Header extends Component {
         
         switch(this.props.auth){
             case null :return  <li>Loading ... </li>
-            case false:return [<li className='right'><a href='/auth/google'><i className="fa fa-google right small"></i></a></li>,
-                               <li className='right'><a href='/auth/google'><i className="fa fa-linkedin-square right small"></i></a></li>,
-                               <li className='right'><a href='/auth/google'><i className="fa fa-github right small"></i></a></li>,
-                               <li className='right'><a href='/auth/google'><i className="fa fa-facebook right small"></i></a></li>,
+            case false:return [<li className='right' key='google'><a href='/auth/google'><i className="fa fa-google right small"></i></a></li>,
+                               <li className='right' key='linkedin'><a href='/auth/linkedin'><i className="fa fa-linkedin-square right small"></i></a></li>,
+                               <li className='right' key='gitb'><a href='/auth/github'><i className="fa fa-github right small"></i></a></li>,
+                               <li className='right' key='facebook'><a href='/auth/google'><i className="fa fa-facebook right small"></i></a></li>,
                             ]
             default: return [
                                 
