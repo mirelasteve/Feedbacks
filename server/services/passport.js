@@ -77,14 +77,16 @@ passport.use(new GitHubStrategy({
     proxy:true
   },
   (token, tokenSecret, profile, done)=> {
-    // console.log('github',token,profile)
+    
     User.findOne({ githubId: profile.id }).then((existingUser)=>{
         if(existingUser){
             done(null,existingUser)
         } else {
  
             new User({
-                githubId:profile.id
+                githubId:profile.id,
+                displayName:profile.displayName,
+                userEmails:profile.emails
             }).save()
                 .then(user=> done(null,user))
         }
