@@ -6,7 +6,7 @@ const keys = require('../config/config') ;
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
 
-console.log('passport')
+// console.log('passport')
 
 passport.serializeUser((user,done)=>{
     done(null,user.id)
@@ -54,7 +54,7 @@ passport.use(new LinkedInStrategy({
     callbackURL: '/auth/linkedin/callback',
     proxy:true
   },(token, tokenSecret, profile, done)=> {
-    console.log('linkedin')
+    // console.log('linkedin')
     User.findOne({linkedinId: profile.id}).then((existingUser)=>{
         if(existingUser){
             done(null,existingUser)
@@ -77,7 +77,7 @@ passport.use(new GitHubStrategy({
     proxy:true
   },
   (token, tokenSecret, profile, done)=> {
-    console.log('github',token,profile)
+    // console.log('github',token,profile)
     User.findOne({ githubId: profile.id }).then((existingUser)=>{
         if(existingUser){
             done(null,existingUser)
