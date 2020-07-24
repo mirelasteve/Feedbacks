@@ -1,7 +1,7 @@
 export default  [
-    {label:'From: ',name:'fromEmail'},
-    {label:'Campaign Title', name:'title'},
-    {label:'Subject Title',name:'subject'},
-    {label:'Email Body' , name:'body'},
-    {label:'Recipients, comma-separated example@example.mail,myMail@my.mail' , name:'recipients'}
+    
+    {label:'Campaign Title', name:'title',placeholder:''},
+    {label:'Subject Title',name:'subject',placeholder:'Do you like our product? Are you satisfied with our service?'},
+    {label:'Email Body' , name:'body',placeholder:''},
+    {label:'Recipients, comma-separated' , name:'recipients',placeholder:'example@example.mail,myMail@my.mail'}
 ]

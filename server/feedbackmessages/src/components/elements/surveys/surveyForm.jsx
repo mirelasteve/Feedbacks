@@ -14,32 +14,34 @@ class SurveyForm extends Component {
         }
     }
    
-    renderFields(userEmails){
-       return formFields.map(({label,name})=>{
-           return <Field className='text-light-app' key={name} component={surveyField} type='text' label={label} name={name} userEmails={userEmails}></Field>
+    renderFields(){
+       return formFields.map(({label,name,placeholder})=>{
+           return <Field className='text-light-app' key={name} component={surveyField} type='text' label={label} name={name} placeholder={placeholder}></Field>
        }
     )
     }
     render(){
       
         
-         return(<div className='mt-5 row'>
-        <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
-            
-            <div className='col m9 xs12'>
+         return(
+         <div className='mt-5 row'>
+            <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
                 
-                {this.renderFields(this.props.userEmails)}
-           </div> 
-            <div className='col m12 '>
-           <Link className='btn-flat left red ' to='/surveys'>Cancel</Link>
-            <button className='green btn-flat right white-text' type='submit'>
-                Preview
-                <i className='material-icons right'>done</i>
-            </button>
-            </div>
-        </form>
+                <div className='col m9 xs12'>
+                    
+                    {this.renderFields()}
+            </div> 
+                <div className='col m12 '>
+                <Link className='btn-flat left red ' to='/surveys'>Cancel</Link>
+                <button className='green btn-flat right white-text' type='submit'>
+                    Preview
+                    <i className='material-icons right'>done</i>
+                </button>
+                </div>
+            </form>
             
-        </div>)	} 
+        </div>
+        )} 
  } 
  function validate(values){
      
@@ -58,9 +60,7 @@ class SurveyForm extends Component {
     if(!values.recipients){
         errors.recipients = 'Invalid email';
     }
-    if(!values.fromEmail){
-        errors.fromEmail = 'Please enter email';
-    }
+    
     
      return errors;
  }

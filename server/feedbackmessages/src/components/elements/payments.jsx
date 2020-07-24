@@ -10,11 +10,11 @@ class Payments extends Component {
     render(){
         return(
             <StripeCheckout
-                amount={100} 
+                amount={500} 
                 token = {token=>this.props.handleStripeToken(token)}
                 stripeKey = {process.env.REACT_APP_STRIPE_KEY}
                 name = 'Feedback Messages'
-                description = '$ for 5 emails'
+                description = '5$ for 5 emails'
             >
             <button className='btn text-light-app transparent'>Add Credits</button>
             </StripeCheckout>

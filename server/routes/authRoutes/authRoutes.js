@@ -5,22 +5,23 @@ module.exports = (app)=>{
     app.get('/auth/google', passport.authenticate('google',{
         scope:['profile','email']
         })
-    )
+    );
 
     app.get('/auth/google/callback',
-    passport.authenticate('google'),
-    (req,res)=>{
-        res.redirect('/surveys')
-    });
+            passport.authenticate('google'),
+            (req,res)=>{
+                res.redirect('/surveys')
+            });
 
-app.get('/auth/linkedin',passport.authenticate('linkedin',{
+    app.get('/auth/linkedin',passport.authenticate('linkedin',{
         scope: ['r_liteprofile', 'r_emailaddress']
-        }));
+        })
+    );
 
     app.get('/auth/linkedin/callback',
             passport.authenticate('linkedin'),
             (req,res)=>{
-                // console.log(req)
+                req.body
                 res.redirect('/surveys')
             }
         )
@@ -30,11 +31,11 @@ app.get('/auth/linkedin',passport.authenticate('linkedin',{
     app.get('/auth/github',passport.authenticate('github'));
 
     app.get('/auth/github/callback',
-     passport.authenticate('github'),
-     (req,res)=>{
-        //  console.log(req)
-         res.redirect('/surveys')
-     }
+            passport.authenticate('github'),
+            (req,res)=>{
+               
+                res.redirect('/surveys')
+            }
     );
     
     

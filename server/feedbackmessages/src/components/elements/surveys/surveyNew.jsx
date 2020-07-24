@@ -11,6 +11,7 @@ class SurveyNew extends Component {
         super(props);
         this.state={
             showSurveyFormReview: false,
+            showLoader:false,
             auth:props.auth
         }
     }
@@ -19,14 +20,15 @@ class SurveyNew extends Component {
       
         if(this.state.showSurveyFormReview){
             return <SurveyFormReview 
+                    showLoader={this.state.showLoader} 
                     onCancel={()=>this.setState({showSurveyFormReview:false})}
-                    userEmails={this.props.auth?this.props.auth.userEmails:[]}
-                    
-                ></SurveyFormReview>
+                    ></SurveyFormReview>
         }
-        return <SurveyForm onSurveySubmit={()=>
+        return <SurveyForm 
+                    onSurveySubmit={()=>
                     this.setState({
-                        showSurveyFormReview:true
+                        showSurveyFormReview:true,
+                        showLoader:true
                     })} userEmails={this.props.auth?this.props.auth.userEmails:[]}>
                 </SurveyForm>
     }

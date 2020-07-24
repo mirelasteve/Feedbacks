@@ -10,11 +10,27 @@ return (
         <h1>${survey.title}</h1>
         <h3>${survey.subject}</h3>
         <h3>${survey.body}</h3>
-        <div>
-            <a style='color:#F5DEB3' href="${keys.redirectDomain}/api/surveys/${survey.id}/yes">Yes</a>
+        <div style='display: inline;'>
+            <a style='display: inline;' href="${keys.redirectDomain}/api/surveys/${survey.id}/yes"><button 
+            style='background-color: #4CAB32; /* Green */
+                    border: none;
+                    color: white;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;'>Yes</button></a>
         </div>
-        <div>
-            <a style='color:#F5DEB3' href="${keys.redirectDomain}/api/surveys/${survey.id}/no">No</a>
+        <div style='display: inline;'>
+            <a style='display: inline;' href="${keys.redirectDomain}/api/surveys/${survey.id}/no"><button 
+            style='background-color:orange;
+                    border: none;
+                    color: red;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;'>No</button></a>
         </div>
        
     </div>

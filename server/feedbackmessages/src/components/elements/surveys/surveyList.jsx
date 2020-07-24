@@ -4,10 +4,12 @@ import {connect} from 'react-redux';
 import * as actions from '../../actions/index';
 import _ from "lodash";
 import M from 'materialize-css'; 
+import Loader from '../loader/loader';
 
 class SurveyList  extends Component { 
     state = {
         surveys:this.props.surveys,
+        workSurveys:this.props.surveys,
         factor:'',
         rise:true,
         buttonsFlags :{
@@ -20,7 +22,8 @@ class SurveyList  extends Component {
     componentDidMount(){
       this.props.fetchSurveys().then(()=>{
         this.setState({
-            surveys: this.props.surveys
+            surveys: this.props.surveys,
+            workSurveys: this.props.surveys
         })
       });
       let elems = document.querySelectorAll('.dropdown-trigger');
@@ -39,7 +42,7 @@ class SurveyList  extends Component {
             changeButton[factor]=!changeButton[factor]
             
            this.setState({
-                surveys:deepCopySurveys.sort((a,b)=>(a[factor]).localeCompare(b[factor])),
+                workSurveys:deepCopySurveys.sort((a,b)=>(a[factor]).localeCompare(b[factor])),
                 rise:false,
                 buttonsFlags:changeButton
             })
@@ -48,17 +51,25 @@ class SurveyList  extends Component {
             const changeButton = {...this.state.buttonsFlags};
             changeButton[factor]=!changeButton[factor]
              this.setState({
-                surveys:deepCopySurveys.sort((a,b)=>(b[factor]).localeCompare(a[factor])),
+                workSurveys:deepCopySurveys.sort((a,b)=>(b[factor]).localeCompare(a[factor])),
                 rise:true,
                 buttonsFlags:!changeButton
             })
         }
     }
+    filterSurveys(e){
+        let search = e.target.value;
+        const copySurveys = [...this.state.surveys];
+        const filterSurveys = copySurveys.filter(x=>x.title.includes(search));
+        
+        this.setState({
+            workSurveys:filterSurveys
+        })
+    }
     removeSurveys(surveyId){
         this.props.removeSurvey(surveyId);
         const deepCopySurveys = _.cloneDeep(this.state.surveys);
         let newSurveys = deepCopySurveys.filter(x=>x._id !== surveyId);
-        console.log(newSurveys);
         
         this.setState({
             surveys:newSurveys
@@ -71,9 +82,11 @@ class SurveyList  extends Component {
         if(this.state.surveys){
             return (
             <div className='row mt-5'>
-                <a href='#'className='dropdown-trigger btn transparent text-light-app'  data-target='dropdown1'>Sort by</a>
 
-                    <div className='col-10'>
+                    <div className='row'>
+                        <div className='col s5'>
+                        <a href='#'className='dropdown-trigger btn transparent text-light-app'  data-target='dropdown1'>Sort by</a>
+
                         <ul id='dropdown1' className='dropdown-content'>
                             <li><button className='btn btn-small transparent text-darken-app' onClick={(e)=>this.sortSurveys(e,'title')}>Campaign Name{this.state.buttonsFlags.title ? <i className="material-icons right">arrow_upward</i>:<i className="material-icons">arrow_downward</i>}</button></li>
                             <li><button className='btn btn-small ml-1 transparent text-darken-app' onClick={(e)=>this.sortSurveys(e,'subject')}>Subject{this.state.buttonsFlags.subject ? <i className="material-icons right">arrow_upward</i>:<i className="material-icons">arrow_downward</i>}</button></li>
@@ -81,9 +94,14 @@ class SurveyList  extends Component {
                             <li><button className='btn btn-small ml-1 transparent text-darken-app' onClick={(e)=>this.sortSurveys(e,'body')}>Content{this.state.buttonsFlags.body ? <i className="material-icons right">arrow_upward</i>:<i className="material-icons">arrow_downward</i>}</button></li>
                         
                         </ul>
+                        </div>
+                        <div className='col s6'>
+                            <label>Find a campaign</label>
+                            <input onInput={(e)=>this.filterSurveys(e)} type='text'/>
+                        </div>
                     </div>
                 
-                {this.state.surveys.map((survey,index)=>
+                {this.state.workSurveys.map((survey,index)=>
                 <div className='' key={index}>
                 <div className='col xs12 m6'>
                     <div className='card ' key = {index}>
@@ -117,7 +135,7 @@ class SurveyList  extends Component {
                             </div>
                         
                         <div className='card-action'>
-                            <button className='btn-floating wave left yellow'><i className='material-icons'>edit</i></button>
+                            {/* <button className='btn-floating wave left yellow'><i className='material-icons'>edit</i></button> */}
                         </div>
 
                     </div>
@@ -136,7 +154,7 @@ class SurveyList  extends Component {
         )}
         else{
                return (             
-                <h2>LOADING............</h2>
+                <Loader></Loader>
                )
         }
     }
@@ -144,7 +162,6 @@ class SurveyList  extends Component {
 }
 
 function mapStateToProps(state){
-    console.log('mapState ',state.surveys);
     
     return{
         surveys:state.surveys,
