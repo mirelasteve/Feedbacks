@@ -5,7 +5,7 @@ import * as actions from '../../actions';
 import {withRouter} from 'react-router';
 import  SurveyList  from './surveyList';
 import Loader from '../loader/loader';
-const SurveyFormReview = ({ onCancel,formValues,submitSurvey, history,showLoader }) => {
+const SurveyFormReview = ({ onCancel,formValues,submitSurvey, history,credits}) => {
     
     
     
@@ -35,8 +35,13 @@ const SurveyFormReview = ({ onCancel,formValues,submitSurvey, history,showLoader
                     Send
                     <i className="large material-icons">email</i>
                 </button>
+                
             </div>
-          
+            <div className='col s-4 right'>
+            {credits<1
+            ?<span className='red-text '>You dont have enough credits</span>
+            :<span></span>}
+            </div>
         </div>
     )
 }

@@ -12,24 +12,31 @@ class SurveyNew extends Component {
         this.state={
             showSurveyFormReview: false,
             showLoader:false,
+            showAlertNoCredit:false,
             auth:props.auth
         }
     }
     
+    submitSurvey(){
+        
+            this.setState({
+                showSurveyFormReview:true,
+                showLoader:true
+            })
+        
+    }
     renderContent(){
       
         if(this.state.showSurveyFormReview){
             return <SurveyFormReview 
-                    showLoader={this.state.showLoader} 
-                    onCancel={()=>this.setState({showSurveyFormReview:false})}
+                        showLoader={this.state.showLoader} 
+                        onCancel={()=>this.setState({showSurveyFormReview:false})}
+                        credits={this.props.auth.credits}
                     ></SurveyFormReview>
         }
         return <SurveyForm 
-                    onSurveySubmit={()=>
-                    this.setState({
-                        showSurveyFormReview:true,
-                        showLoader:true
-                    })} userEmails={this.props.auth?this.props.auth.userEmails:[]}>
+                    onSurveySubmit={()=>this.submitSurvey()} 
+                    userEmails={this.props.auth?this.props.auth.userEmails:[]}>
                 </SurveyForm>
     }
     render(){
