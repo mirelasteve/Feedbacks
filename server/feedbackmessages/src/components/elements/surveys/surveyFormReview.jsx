@@ -1,10 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import formFields from './formField';
 import * as actions from '../../actions';
 import {withRouter} from 'react-router';
-import  SurveyList  from './surveyList';
-import Loader from '../loader/loader';
 const SurveyFormReview = ({ onCancel,formValues,submitSurvey, history,credits}) => {
     
     

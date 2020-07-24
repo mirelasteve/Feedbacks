@@ -84,8 +84,8 @@ class SurveyList  extends Component {
             <div className='row mt-5'>
 
                     <div className='row'>
-                        <div className='col s5'>
-                        <a href='#'className='dropdown-trigger btn transparent text-light-app'  data-target='dropdown1'>Sort by</a>
+                        <div className='col s4'>
+                        <a href='/#'className='dropdown-trigger btn transparent text-light-app'  data-target='dropdown1'>Sort by</a>
 
                         <ul id='dropdown1' className='dropdown-content'>
                             <li><button className='btn btn-small transparent text-darken-app' onClick={(e)=>this.sortSurveys(e,'title')}>Campaign Name{this.state.buttonsFlags.title ? <i className="material-icons right">arrow_upward</i>:<i className="material-icons">arrow_downward</i>}</button></li>
@@ -128,10 +128,10 @@ class SurveyList  extends Component {
                                 <span className='subject col xs12 m7'>{survey.body}</span>
                             </div>
                             <div>
-                                <span className='bold col xs12 m4 red-text'>Yes {survey.yes}</span>
+                                <span className='bold col xs12 m5 red-text'>Yes {survey.yes}</span>
                             </div>
                             <div className='row'>
-                                <span className='bold col xs12 red-text'>No {survey.no}</span>
+                                <span className='bold col xs12 m4 red-text'>No {survey.no}</span>
                             </div>
                         
                         <div className='card-action'>
